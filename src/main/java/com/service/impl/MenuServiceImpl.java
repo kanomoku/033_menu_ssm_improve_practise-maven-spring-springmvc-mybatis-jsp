@@ -20,5 +20,4 @@ public class MenuServiceImpl implements MenuService{
 		List<Menu> selByPid = meneMapper.selByPid(0);
 		return selByPid;
 	}
-
 }

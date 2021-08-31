@@ -24,10 +24,7 @@ public class MenuController {
 	@RequestMapping("show")
 	@ResponseBody 
 	public List<Menu> show() {
-
 		List<Menu> show = menuServiceImpl.show();
 		return show;
-
 	}
-
 }

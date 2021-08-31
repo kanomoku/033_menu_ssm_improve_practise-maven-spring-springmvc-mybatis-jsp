@@ -14,7 +14,9 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="byName">
         
     <!-- 注解扫描 -->
+    <!-- Spring只扫描Service SpringMVC只扫描Controller 如果Spring扫描Controller将会出现声明式事务无效的效果 -->
     <context:component-scan base-package="com.service.impl"></context:component-scan>
+    
     <!-- 加载属性文件 -->
     <context:property-placeholder location="classpath:db.properties"/>
     
@@ -28,8 +30,10 @@
     <!-- SqlSessionFactory -->
     <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="dataSource"></property>
+    	<!-- 别名 -->
     	<property name="typeAliasesPackage" value="com.pojo"></property>
     </bean>
+    
     <!-- 扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
     	<property name="basePackage" value="com.mapper"></property>
@@ -51,6 +55,7 @@
     </tx:advice>
     <!-- 配置aop -->
     <aop:config>
+    	<!-- impl下的任意类的任意方法的任意参数 -->
     	<aop:pointcut expression="execution(* com.service.impl.*.*(..))" id="mypoint"/>
     	<aop:advisor advice-ref="txAdvice" pointcut-ref="mypoint"/>
     </aop:config>

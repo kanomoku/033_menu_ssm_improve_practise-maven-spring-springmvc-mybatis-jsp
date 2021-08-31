@@ -6,5 +6,4 @@ import com.pojo.Menu;
 
 public interface MenuService {
 	List<Menu> show();
-
 }
